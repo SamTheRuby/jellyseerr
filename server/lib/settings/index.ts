@@ -657,11 +657,17 @@ class Settings {
   }
 }
 
+let loaded = false;
 let settings: Settings | undefined;
 
 export const getSettings = (initialSettings?: AllSettings): Settings => {
   if (!settings) {
     settings = new Settings(initialSettings);
+  }
+
+  if (!loaded) {
+    settings.load();
+    loaded = true;
   }
 
   return settings;
